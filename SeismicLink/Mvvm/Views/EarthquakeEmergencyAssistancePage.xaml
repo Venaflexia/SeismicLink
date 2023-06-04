@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeismicLink.Mvvm.Views.EarthquakeEmergencyAssistancePage"
+             Title="EarthquakeEmergencyAssistancePage" Shell.NavBarIsVisible="False"
+             xmlns:vm="clr-namespace:SeismicLink.Mvvm.ViewModels" >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:EarthquakeEmergencyAssistancePageVM x:Key="vm"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Padding="15,0" BindingContext="{StaticResource Key=vm}">
+            <StackLayout Margin="0,20,0,20" Spacing="5"  Orientation="Horizontal">
+               <Frame BackgroundColor="Transparent" CornerRadius="5" Margin="0" Padding="0" BorderColor="{AppThemeBinding Dark=white,Light=black}" HorizontalOptions="FillAndExpand">
+                    <SearchBar Text="{Binding SearchBarText}"  SearchCommand="{Binding CmdSearchEmergency}" Placeholder="Search"/>
+                </Frame>
+                <ImageButton Command="{Binding CmdAddEmergency}" VerticalOptions="Center" Margin="0" CornerRadius="5" Padding="5" HeightRequest="50" WidthRequest="50" BackgroundColor="{AppThemeBinding Dark=white,Light=black}">
+                    <ImageButton.Source>
+                        <FontImageSource Glyph="&#xe05c;" Color="{AppThemeBinding Dark=black,Light=white}" FontFamily="FAS"/>
+                    </ImageButton.Source>
+                </ImageButton>
+            </StackLayout>
+            <Label IsVisible="{Binding LabelIsVisibleHelp}" Text="{Binding LabelHelp}" HorizontalTextAlignment="Center" HorizontalOptions="Center" Margin="0,20,0,0" FontSize="Subtitle"/>
+            <RefreshView Command="{Binding RefreshList}" BackgroundColor="white"  RefreshColor="DodgerBlue" IsRefreshing="{Binding IsRefreshing}">
+                <CollectionView
+                x:Name="CollectionViewEarthQuake"
+                ItemsSource="{Binding EarthquakeEmergencyAssistanceList}"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedItem}" 
+                SelectionChangedCommand="{Binding CmdSelectionChanged}"
+                    >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout VerticalOptions="StartAndExpand" Spacing="5"  Padding="15,15" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#364F6B}">
+                                <StackLayout Orientation="Horizontal" Margin="0,0,0,3">
+                                    <Label TextColor="{AppThemeBinding Dark=dodgerblue,Light=orange}"  FontAttributes="Bold" Margin="0,0,5,0" FontSize="Subtitle" Text="{Binding Name}"/>
+                                    <Label TextColor="{AppThemeBinding Dark=dodgerblue,Light=orange}" FontAttributes="Bold" FontSize="Subtitle" Text="{Binding LastName}"/>
+                                    <Label Text="{Binding Reported}"  FontSize="14" FontAttributes="Bold" TextColor="{AppThemeBinding Dark=#2DCF85,Light=#FF2E63}" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                                 <StackLayout Orientation="Horizontal">
+                                    <Label TextColor="{AppThemeBinding Dark=lightgray,Light=white}" Margin="0,0,5,0" FontAttributes="Bold" FontSize="Body" Text="{Binding CountryName}"/>
+                                    <Label TextColor="{AppThemeBinding Dark=lightgray,Light=white}"  FontSize="Body" FontAttributes="Bold" Text="{Binding CityName}"/>
+                                    </StackLayout>
+                                <Label Margin="0,0,0,5" TextColor="{AppThemeBinding Dark=gray,Light=lightgray}"  FontAttributes="Italic" FontSize="Subtitle"  Text="{Binding HelpDescription}"  MaxLines="2"/>
+                                <Label TextColor="White" HorizontalTextAlignment="End" FontSize="15" FontAttributes="Bold" Text="{Binding SharedDate}"/>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout VerticalItemSpacing="15"  Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ScrollView>
+
+
+</ContentPage>

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mtc:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeismicLink.Mvvm.Views.FilterPopupPage"
+            xmlns:mtc="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+           xmlns:vm="clr-namespace:SeismicLink.Mvvm.ViewModels"
+           CanBeDismissedByTappingOutsideOfPopup="True" xmlns:sys="clr-namespace:System;assembly=mscorlib" >
+
+	<StackLayout VerticalOptions="Center" BackgroundColor="{AppThemeBinding Dark=#272727,Light=#0F4C75}" Spacing="15" Padding="20" WidthRequest="{StaticResource Key=DeviceWidth}" HeightRequest="{StaticResource DeviceHeight}">
+		<Label Margin="0,0,0,10" Text="F i l t e r" HorizontalOptions="Center" TextColor="White" FontSize="Title" FontAttributes="Bold"/>
+
+
+		<StackLayout Padding="15,0" BackgroundColor="{AppThemeBinding Dark=#565656,Light=#3282B8}" Orientation="Horizontal">
+			<Label TextColor="White" FontSize="Subtitle" Text="Kandilli Observatory" VerticalOptions="Center"/>
+			<Switch IsToggled="{Binding KandilliRasathanesi}" x:Name="AutoSelectCountrySwitch" VerticalOptions="Center" HorizontalOptions="EndAndExpand" ThumbColor="White" OnColor="DodgerBlue"/>
+		</StackLayout>
+
+		<StackLayout Padding="15,0" BackgroundColor="{AppThemeBinding Dark=#565656,Light=#3282B8}" Orientation="Horizontal">
+			<Label TextColor="White" FontSize="Subtitle" Text="Date" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+			<DatePicker Date="{Binding StartTime}" VerticalOptions="Center"  TextColor="White" MinimumDate="{StaticResource AppDate}" MaximumDate="{Binding TodayDate}"
+           />
+			<BoxView HeightRequest="2" WidthRequest="12" Margin="5,0" Color="{AppThemeBinding Dark=dodgerblue,Light=orange}"/>
+			<DatePicker x:Name="EndTimePicker" Date="{Binding EndTime}" MinimumDate="{StaticResource AppDate}" MaximumDate="{Binding TodayDate}" VerticalOptions="Center"  TextColor="White"
+          />
+		</StackLayout>
+		<StackLayout Padding="15,0" BackgroundColor="{AppThemeBinding Dark=#565656,Light=#3282B8}" Orientation="Horizontal">
+			<Label TextColor="White" FontSize="Subtitle" HorizontalOptions="StartAndExpand" Text="Min-Max Size" VerticalOptions="Center"/>
+			<Entry TextColor="White" Margin="0" PlaceholderColor="LightGray" x:Name="MagValueMinEntry" Keyboard="Numeric" HorizontalTextAlignment="Center" Text="{Binding MagValueMin}"/>
+			<BoxView HeightRequest="2" Margin="5,0" WidthRequest="12" Color="{AppThemeBinding Dark=dodgerblue,Light=orange}"/>
+			<Entry TextColor="White" Margin="0" PlaceholderColor="LightGray" x:Name="MagValueMaxEntry" HorizontalTextAlignment="Center" Keyboard="Numeric" Text="{Binding MagValueMax}"/>
+		</StackLayout>
+		<StackLayout Padding="15,0" BackgroundColor="{AppThemeBinding Dark=#565656,Light=#3282B8}" Orientation="Horizontal">
+			<Label TextColor="White" FontSize="Subtitle" HorizontalOptions="StartAndExpand" Text="Bounding Box Expansion" VerticalOptions="Center"/>
+            <Entry IsReadOnly="True" TextColor="White" PlaceholderColor="LightGray" HorizontalTextAlignment="Center" Placeholder="200"  x:Name="boundingBoxExpansionLabel" Keyboard="Numeric" Text="{Binding BoundingBoxExpansion}" />
+        </StackLayout>
+        <Slider ThumbColor="White" MaximumTrackColor="Gray" MinimumTrackColor="Orange" Maximum="300" Minimum="0" Value="{Binding BoundingBoxExpansion,StringFormat='{0}'}">
+            <Slider.Triggers>
+                <DataTrigger TargetType="Slider" Binding="{Binding Source={x:Reference AutoSelectCountrySwitch},Path=IsToggled}" Value="True">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger TargetType="Slider" Binding="{Binding Source={x:Reference AutoSelectCountrySwitch},Path=IsToggled}" Value="False">
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>
+            </Slider.Triggers>
+        </Slider>
+        <StackLayout Padding="15,0" BackgroundColor="{AppThemeBinding Dark=#565656,Light=#3282B8}" Orientation="Horizontal" Spacing="15">
+			<Label TextColor="White" FontSize="Subtitle" Text="Country Name" VerticalOptions="Center"/>
+            <Picker HorizontalTextAlignment="Center" SelectedIndexChanged="picker_SelectedIndexChanged" Title="All Countries" TitleColor="{AppThemeBinding Dark=white,Light=Orange}" x:Name="myPicker" SelectedItem="{Binding CountryName}" TextColor="White" HorizontalOptions="FillAndExpand">
+				<Picker.Items>
+                        <x:String>All Countries</x:String>
+						<x:String>Afghanistan</x:String>
+						<x:String>Åland Islands</x:String>
+						<x:String>Albania</x:String>
+						<x:String>Algeria</x:String>
+						<x:String>American Samoa</x:String>
+						<x:String>Andorra</x:String>
+						<x:String>Angola</x:String>
+						<x:String>Anguilla</x:String>
+						<x:String>Antigua  Barbuda</x:String>
+						<x:String>Argentina</x:String>
+						<x:String>Armenia</x:String>
+						<x:String>Aruba</x:String>
+						<x:String>Australia</x:String>
+						<x:String>Austria</x:String>
+						<x:String>Azerbaijan</x:String>
+						<x:String>Bahamas</x:String>
+						<x:String>Bahrain</x:String>
+						<x:String>Bangladesh</x:String>
+						<x:String>Barbados</x:String>
+						<x:String>Belarus</x:String>
+						<x:String>Belgium</x:String>
+						<x:String>Belize</x:String>
+						<x:String>Benin</x:String>
+						<x:String>Bermuda</x:String>
+						<x:String>Bhutan</x:String>
+						<x:String>Bolivia</x:String>
+						<x:String>Bonaire, Sint Eustatius and Saba</x:String>
+						<x:String>Bosnia  Herzegovina</x:String>
+						<x:String>Bosnia and Herzegovina</x:String>
+						<x:String>Botswana</x:String>
+						<x:String>Brazil</x:String>
+						<x:String>British Indian Ocean Territory</x:String>
+						<x:String>British Virgin Islands</x:String>
+						<x:String>Brunei</x:String>
+						<x:String>Bulgaria</x:String>
+						<x:String>Burkina Faso</x:String>
+						<x:String>Burundi</x:String>
+						<x:String>Cabo Verde</x:String>
+						<x:String>Cambodia</x:String>
+						<x:String>Cameroon</x:String>
+						<x:String>Canada</x:String>
+						<x:String>Caribbean</x:String>
+						<x:String>Cayman Islands</x:String>
+						<x:String>Central African Republic</x:String>
+						<x:String>Chad</x:String>
+						<x:String>Chile</x:String>
+						<x:String>China</x:String>
+						<x:String>Christmas Island</x:String>
+						<x:String>Cocos (Keeling) Islands</x:String>
+						<x:String>Colombia</x:String>
+						<x:String>Comoros</x:String>
+						<x:String>Congo</x:String>
+						<x:String>Congo (DRC)</x:String>
+						<x:String>Cook Islands</x:String>
+						<x:String>Costa Rica</x:String>
+						<x:String>Côte d'Ivoire</x:String>
+						<x:String>Croatia</x:String>
+						<x:String>Cuba</x:String>
+						<x:String>Curaçao</x:String>
+						<x:String>Cyprus</x:String>
+						<x:String>Czechia</x:String>
+						<x:String>Denmark</x:String>
+						<x:String>Djibouti</x:String>
+						<x:String>Dominica</x:String>
+						<x:String>Dominican Republic</x:String>
+						<x:String>Ecuador</x:String>
+						<x:String>Egypt</x:String>
+						<x:String>El Salvador</x:String>
+						<x:String>Equatorial Guinea</x:String>
+						<x:String>Eritrea</x:String>
+						<x:String>Estonia</x:String>
+						<x:String>Eswatini</x:String>
+						<x:String>Ethiopia</x:String>
+						<x:String>Europe</x:String>
+						<x:String>Falkland Islands</x:String>
+						<x:String>Faroe Islands</x:String>
+						<x:String>Fiji</x:String>
+						<x:String>Finland</x:String>
+						<x:String>France</x:String>
+						<x:String>French Guiana</x:String>
+						<x:String>French Polynesia</x:String>
+						<x:String>Gabon</x:String>
+						<x:String>Gambia</x:String>
+						<x:String>Georgia</x:String>
+						<x:String>Germany</x:String>
+						<x:String>Ghana</x:String>
+						<x:String>Gibraltar</x:String>
+						<x:String>Greece</x:String>
+						<x:String>Greenland</x:String>
+						<x:String>Grenada</x:String>
+						<x:String>Guadeloupe</x:String>
+						<x:String>Guam</x:String>
+						<x:String>Guatemala</x:String>
+						<x:String>Guernsey</x:String>
+						<x:String>Guinea</x:String>
+						<x:String>Guinea-Bissau</x:String>
+						<x:String>Guyana</x:String>
+						<x:String>Haiti</x:String>
+						<x:String>Honduras</x:String>
+						<x:String>Hong Kong SAR</x:String>
+						<x:String>Hungary</x:String>
+						<x:String>Iceland</x:String>
+						<x:String>India</x:String>
+						<x:String>Indonesia</x:String>
+						<x:String>Iran</x:String>
+						<x:String>Iraq</x:String>
+						<x:String>Ireland</x:String>
+						<x:String>Isle of Man</x:String>
+						<x:String>Israel</x:String>
+						<x:String>Italy</x:String>
+						<x:String>Jamaica</x:String>
+						<x:String>Japan</x:String>
+						<x:String>Jersey</x:String>
+						<x:String>Jordan</x:String>
+						<x:String>Kazakhstan</x:String>
+						<x:String>Kenya</x:String>
+						<x:String>Kiribati</x:String>
+						<x:String>Korea</x:String>
+						<x:String>Kosovo</x:String>
+						<x:String>Kuwait</x:String>
+						<x:String>Kyrgyzstan</x:String>
+						<x:String>Laos</x:String>
+						<x:String>Latin America</x:String>
+						<x:String>Latvia</x:String>
+						<x:String>Lebanon</x:String>
+						<x:String>Lesotho</x:String>
+						<x:String>Liberia</x:String>
+						<x:String>Libya</x:String>
+						<x:String>Liechtenstein</x:String>
+						<x:String>Lithuania</x:String>
+						<x:String>Luxembourg</x:String>
+						<x:String>Macao SAR</x:String>
+						<x:String>Madagascar</x:String>
+						<x:String>Malawi</x:String>
+						<x:String>Malaysia</x:String>
+						<x:String>Maldives</x:String>
+						<x:String>Mali</x:String>
+						<x:String>Malta</x:String>
+						<x:String>Marshall Islands</x:String>
+						<x:String>Martinique</x:String>
+						<x:String>Mauritania</x:String>
+						<x:String>Mauritius</x:String>
+						<x:String>Mayotte</x:String>
+						<x:String>Mexico</x:String>
+						<x:String>Micronesia</x:String>
+						<x:String>Moldova</x:String>
+						<x:String>Monaco</x:String>
+						<x:String>Mongolia</x:String>
+						<x:String>Montenegro</x:String>
+						<x:String>Montserrat</x:String>
+						<x:String>Morocco</x:String>
+						<x:String>Mozambique</x:String>
+						<x:String>Myanmar</x:String>
+						<x:String>Namibia</x:String>
+						<x:String>Nauru</x:String>
+						<x:String>Nepal</x:String>
+						<x:String>Netherlands</x:String>
+						<x:String>New Caledonia</x:String>
+						<x:String>New Zealand</x:String>
+						<x:String>Nicaragua</x:String>
+						<x:String>Niger</x:String>
+						<x:String>Nigeria</x:String>
+						<x:String>Niue</x:String>
+						<x:String>Norfolk Island</x:String>
+						<x:String>North Korea</x:String>
+						<x:String>North Macedonia</x:String>
+						<x:String>Northern Mariana Islands</x:String>
+						<x:String>Norway</x:String>
+						<x:String>Oman</x:String>
+						<x:String>Pakistan</x:String>
+						<x:String>Palau</x:String>
+						<x:String>Palestinian Authority</x:String>
+						<x:String>Panama</x:String>
+						<x:String>Papua New Guinea</x:String>
+						<x:String>Paraguay</x:String>
+						<x:String>Peru</x:String>
+						<x:String>Philippines</x:String>
+						<x:String>Pitcairn Islands</x:String>
+						<x:String>Poland</x:String>
+						<x:String>Portugal</x:String>
+						<x:String>Puerto Rico</x:String>
+						<x:String>Qatar</x:String>
+						<x:String>Réunion</x:String>
+						<x:String>Romania</x:String>
+						<x:String>Russia</x:String>
+						<x:String>Rwanda</x:String>
+						<x:String>Samoa</x:String>
+						<x:String>San Marino</x:String>
+						<x:String>Sao Tomé  Príncipe</x:String>
+						<x:String>Saudi Arabia</x:String>
+						<x:String>Senegal</x:String>
+						<x:String>Serbia</x:String>
+						<x:String>Seychelles</x:String>
+						<x:String>Sierra Leone</x:String>
+						<x:String>Singapore</x:String>
+						<x:String>Sint Maarten</x:String>
+						<x:String>Slovakia</x:String>
+						<x:String>Slovenia</x:String>
+						<x:String>Solomon Islands</x:String>
+						<x:String>Somalia</x:String>
+						<x:String>South Africa</x:String>
+						<x:String>South Sudan</x:String>
+						<x:String>Spain</x:String>
+						<x:String>Sri Lanka</x:String>
+						<x:String>St Helena, Ascension, Tristan da Cunha</x:String>
+						<x:String>St. Barthélemy</x:String>
+						<x:String>St. Kitts  Nevis</x:String>
+						<x:String>St. Lucia</x:String>
+						<x:String>St. Martin</x:String>
+						<x:String>St. Pierre  Miquelon</x:String>
+						<x:String>St. Vincent  Grenadines</x:String>
+						<x:String>Sudan</x:String>
+						<x:String>Suriname</x:String>
+						<x:String>Svalbard Jan Mayen</x:String>
+						<x:String>Sweden</x:String>
+						<x:String>Switzerland</x:String>
+						<x:String>Syria</x:String>
+						<x:String>Taiwan</x:String>
+						<x:String>Tajikistan</x:String>
+						<x:String>Tanzania</x:String>
+						<x:String>Thailand</x:String>
+						<x:String>Timor-Leste</x:String>
+						<x:String>Togo</x:String>
+						<x:String>Tokelau</x:String>
+						<x:String>Tonga</x:String>
+						<x:String>Trinidad  Tobago</x:String>
+						<x:String>Tunisia</x:String>
+						<x:String>Turkey</x:String>
+						<x:String>Turkmenistan</x:String>
+						<x:String>Turks  Caicos Islands</x:String>
+						<x:String>Tuvalu</x:String>
+						<x:String>U.S. Outlying Islands</x:String>
+						<x:String>U.S. Virgin Islands</x:String>
+						<x:String>Uganda</x:String>
+						<x:String>Ukraine</x:String>
+						<x:String>United Arab Emirates</x:String>
+						<x:String>United Kingdom</x:String>
+						<x:String>United States</x:String>
+						<x:String>Uruguay</x:String>
+						<x:String>Uzbekistan</x:String>
+						<x:String>Vanuatu</x:String>
+						<x:String>Vatican City</x:String>
+						<x:String>Venezuela</x:String>
+						<x:String>Vietnam</x:String>
+						<x:String>Wallis Futuna</x:String>
+						<x:String>World</x:String>
+						<x:String>Yemen</x:String>
+						<x:String>Zambia</x:String>
+						<x:String>Zimbabwe</x:String>
+					</Picker.Items>				
+					<Picker.Triggers>
+					<DataTrigger TargetType="Picker" Binding="{Binding Source={x:Reference AutoSelectCountrySwitch},Path=IsToggled}" Value="True">
+						<Setter Property="IsEnabled" Value="False"/>
+                        <Setter Property="TextColor" Value="{AppThemeBinding Light=LightGray,Dark=DimGray}"/>
+                    </DataTrigger>
+					<DataTrigger TargetType="Picker" Binding="{Binding Source={x:Reference AutoSelectCountrySwitch},Path=IsToggled}" Value="False">
+						<Setter Property="IsEnabled" Value="True"/>
+                        <Setter Property="TextColor" Value="White"/>
+                    </DataTrigger>
+				</Picker.Triggers>
+			</Picker>
+		</StackLayout>
+		<Button Clicked="Button_Clicked" FontAttributes="Bold" Text="S e a r c h" VerticalOptions="EndAndExpand" TextColor="{AppThemeBinding Dark=white,Light=dodgerblue}" BackgroundColor="{AppThemeBinding Dark=dodgerblue,Light=white}" CornerRadius="15"/>
+	</StackLayout>
+
+
+
+</mtc:Popup>

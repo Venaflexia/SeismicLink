@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SeismicLink.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:SeismicLink"
+    Shell.FlyoutBehavior="Disabled"
+    xmlns:views="clr-namespace:SeismicLink.Mvvm.Views" 
+    Shell.UnselectedColor="{AppThemeBinding Dark=lightgray,Light=lightGray}"
+    Shell.TabBarUnselectedColor="DimGray" 
+    Shell.BackgroundColor="{AppThemeBinding Dark=black,Light=#364F6B}"
+    Shell.TabBarTitleColor="{AppThemeBinding Light=orangered,Dark=white}" 
+    Shell.TabBarBackgroundColor="{AppThemeBinding Dark=black,Light=white}" 
+    Shell.TitleColor="White"
+    Shell.ForegroundColor="{AppThemeBinding Dark=dodgerblue,Light=white}" 
+    
+   >
+
+ 
+
+    <FlyoutItem>
+        <Tab >
+            <Tab.Icon>
+                <FontImageSource Glyph="&#xf57d;" Color="White" FontFamily="FAS">
+                </FontImageSource>
+            </Tab.Icon>
+            <ShellContent  ContentTemplate="{DataTemplate views:EarthquakeListPage}" Route="EarthquakeListPage">
+             
+            </ShellContent>
+        </Tab>
+        <Tab>
+            <Tab.Icon>
+                <FontImageSource Glyph="&#xf03a;" Color="White" FontFamily="FAS">
+                </FontImageSource>
+            </Tab.Icon>
+            <ShellContent  Title="Help" ContentTemplate="{DataTemplate views:EarthquakeEmergencyAssistancePage}" Route="EarthquakeEmergencyAssistancePage1">
+
+            </ShellContent>
+            <ShellContent  Title="communication" ContentTemplate="{DataTemplate views:EarthquakeEmergencyAssistancePageCommunication}" Route="EarthquakeEmergencyAssistancePage2">
+
+            </ShellContent>
+        </Tab>
+        <Tab>
+            <Tab.Icon>
+                <FontImageSource Glyph="&#xf007;"  Color="white" FontFamily="FAS">
+                </FontImageSource>
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" Route="ProfilePage">
+
+            </ShellContent>
+        </Tab>
+    </FlyoutItem>
+    <TabBar>
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate views:SeismicLinkLoginPage}" Route="SeismicLinkLoginPage">
+
+            </ShellContent>
+        </Tab>
+    </TabBar>
+
+</Shell>

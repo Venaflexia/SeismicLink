@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeismicLink.Mvvm.Views.SeismicLinkRegisterPage"
+             Title="SeismicLinkRegisterPage"   
+             Shell.NavBarIsVisible="False"
+             xmlns:mtc="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:SeismicLink.Mvvm.ViewModels">
+
+
+    <ContentPage.Behaviors>
+        <mtc:StatusBarBehavior StatusBarColor="{AppThemeBinding Dark=black,Light=white}" StatusBarStyle="{AppThemeBinding Dark=LightContent,Light=DarkContent}"/>
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <vm:SeismicLinkLoginPageVM x:Key="vm"/>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <AbsoluteLayout BindingContext="{StaticResource vm}">
+            <Image Source="connectionhelphand.png" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional" BackgroundColor="{AppThemeBinding Dark=black,Light=white}"/>
+            <StackLayout Padding="15" Spacing="15" AbsoluteLayout.LayoutBounds="1,0.4,1,600"  AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+                <Label Text="W e l c o m e" FontSize="Title" TextColor="{AppThemeBinding Dark=white,Light=dimgray}" FontAttributes="Bold"/>
+                <Frame CornerRadius="15" BorderColor="{AppThemeBinding Dark=#252525,Light=white}" BackgroundColor="{AppThemeBinding Dark=#252525,Light=white}" Opacity="0.9" >
+                    <StackLayout Spacing="15">
+                        <Frame HasShadow="True" Padding="15,0" HeightRequest="50" CornerRadius="25" BackgroundColor="White">
+                            <StackLayout Spacing="5" Orientation="Horizontal" Padding="0" Margin="0">
+                                <Label TextColor="DimGray" Text="&#xf083;" VerticalOptions="Center" FontSize="25" FontFamily="FAS"/>
+                                <Entry HorizontalOptions="FillAndExpand" Text="{Binding UserName}" TextColor="Black" ReturnType="Next" Placeholder="UserName" PlaceholderColor="DimGray" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame  HasShadow="True" Padding="15,0" HeightRequest="50" CornerRadius="25" BackgroundColor="White">
+                            <StackLayout Spacing="5" Orientation="Horizontal" Padding="0" Margin="0">
+                                <Label TextColor="DimGray" Text="&#xf0e0;" VerticalOptions="Center" FontSize="25" FontFamily="FAS"/>
+                                <Entry HorizontalOptions="FillAndExpand" Text="{Binding Email}" IsPassword="False"  Keyboard="Email" ReturnType="Next" TextColor="Black"  Placeholder="Email" PlaceholderColor="DimGray" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame HasShadow="True" Padding="15,0" HeightRequest="50" CornerRadius="25" BackgroundColor="White">
+                            <StackLayout Spacing="5" Orientation="Horizontal" Padding="0" Margin="0">
+                                <Label TextColor="DimGray" Text="&#xf023;" VerticalOptions="Center" FontSize="25" FontFamily="FAS"/>
+                                <Entry x:Name="password" HorizontalOptions="FillAndExpand" Text="{Binding Password}" IsPassword="True" TextColor="Black" ReturnType="Next" Placeholder="Password" PlaceholderColor="DimGray" VerticalOptions="Center"/>
+                                <Label VerticalOptions="Center" FontSize="20" TextColor="DimGray" Text="&#xf06e;" FontFamily="FAS">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Password"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </StackLayout>
+                        </Frame>
+                        <Frame HasShadow="True" Padding="15,0" HeightRequest="50" CornerRadius="25" BackgroundColor="White">
+                            <StackLayout Spacing="5" Orientation="Horizontal" Padding="0" Margin="0">
+                                <Label TextColor="DimGray" Text="&#xf023;" VerticalOptions="Center" FontSize="25" FontFamily="FAS"/>
+                                <Entry x:Name="passwordConfirm" HorizontalOptions="FillAndExpand" Text="{Binding ConfirmPassword}" IsPassword="True" TextColor="Black" ReturnType="Done" Placeholder="Confirm Password" PlaceholderColor="DimGray" VerticalOptions="Center"/>
+                                <Label VerticalOptions="Center" FontSize="20" TextColor="DimGray" Text="&#xf06e;" FontFamily="FAS">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_PasswordConfirm"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                            </StackLayout>
+                        </Frame>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox x:Name="checkbox" CheckedChanged="CheckBox_CheckedChanged" IsChecked="{Binding CheckContrat}" />
+                            <Label TextColor="{AppThemeBinding Dark=white,Light=black}" Text="I have read and accept the contract" VerticalOptions="Center"/>
+                        </StackLayout>
+
+                        <Button CommandParameter="{Binding CanRegister}" Command="{Binding CmdRegister}" TextColor="White" Text="R e g i s t e r" Margin="0,0,0,10" CornerRadius="25" FontAttributes="Bold" BackgroundColor="DodgerBlue" HeightRequest="50"/>
+
+                        <Label Text="Already have an account?" TextDecorations="Underline" TextColor="{AppThemeBinding Dark=white,Light=black}" FontAttributes="Bold">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeismicLink.Mvvm.Views.SelectedEmergencyPage"
+             Title="Help" Shell.NavBarIsVisible="True" >
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="ImageButton_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="&#xf071;" Color="Red" FontFamily="FAS"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content >
+        <ScrollView >
+            <StackLayout>
+                <StackLayout  Spacing="15" Padding="15">
+                  <StackLayout Orientation="Horizontal">
+                   <Label TextColor="DodgerBlue" FontSize="Title" Text="{Binding UserName,StringFormat='@{0}'}"/>
+                   </StackLayout>
+                   <StackLayout Orientation="Horizontal">
+                <Label FontAttributes="Bold" FontSize="18" Margin="0,0,5,0" Text="{Binding Name}"/>
+                <Label FontAttributes="Bold" FontSize="18" Text="{Binding LastName}"/>
+                   </StackLayout >
+            <Label TextColor="{AppThemeBinding Light=black,Dark=white}" FontSize="16" Text="{Binding HelpDescription}"/>
+            <StackLayout Orientation="Horizontal">
+                <Label  FontSize="16" Text="{Binding CountryName,StringFormat='{0}-'}"/>
+                <Label FontSize="16" Text="{Binding CityName}"/>
+            </StackLayout>
+            <Label FontSize="16" Text="{Binding SharedDate,StringFormat='{0}'}"/>
+            <Label FontSize="16" Text="{Binding Email}"/>
+            <Label FontSize="16" Text="{Binding TelNo}"/>
+            <Button x:Name="btnDelete" Clicked="btnDelete_Clicked" Text="Delete" BackgroundColor="DodgerBlue" FontAttributes="Bold" TextColor="White"/>
+                </StackLayout>
+
+                <RefreshView RefreshColor="DodgerBlue" MaximumHeightRequest="700" x:Name="refreshView" Refreshing="refreshView_Refreshing">
+                    <StackLayout VerticalOptions="FillAndExpand" Padding="15" Spacing="15"  >
+
+                        <StackLayout  Spacing="15" Orientation="Horizontal">
+                            <Label FontAttributes="Bold" TextColor="{AppThemeBinding Light=DarkBlue,Dark=DodgerBlue}" FontSize="18" Text="Messages" />
+                            <Label VerticalOptions="Center" TextColor="{AppThemeBinding Light=DarkBlue,Dark=DodgerBlue}" FontSize="18" x:Name="labelCommentsCount"/>
+                        </StackLayout>
+
+                        <StackLayout  Margin="0,0,0,0" Spacing="5" Orientation="Horizontal">
+                            <Label TextColor="{AppThemeBinding Light=black,Dark=white}" Text="&#xf075;" VerticalOptions="Center" FontFamily="FAS" FontSize="25"/>
+                            <Entry x:Name="HelpMessageEntry" Placeholder=" Message" BackgroundColor="{AppThemeBinding Light=#f2f1f6,Dark=#252525}" Completed="HelpMessageEntry_Completed"  HorizontalOptions="FillAndExpand" />
+                        </StackLayout>
+
+                        <CollectionView x:Name="deneme"  VerticalOptions="FillAndExpand" >
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout >
+                                        <StackLayout Margin="0,0,0,5" Orientation="Horizontal">
+                                            <Label VerticalOptions="Center" FontSize="16" FontAttributes="Bold" Text="{Binding name}"/>
+                                            <Label TextColor="Red" IsVisible="{Binding garbageIsVisible}" VerticalOptions="Center" FontSize="16" Text="&#xf2ed;" FontFamily="FAS" HorizontalOptions="EndAndExpand">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                        </StackLayout>
+                                        <Label TextColor="{AppThemeBinding Dark=LightGray,Light=DimGray}"   Text="{Binding message}"/>
+                                        <StackLayout Padding="0" Margin="0,12,0,0" Spacing="5" Orientation="Horizontal">
+                                            <Label TextColor="DodgerBlue" VerticalOptions="Center" FontSize="16" Text="&#xf165;" FontFamily="FAS">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                            <Label TextColor="DodgerBlue" VerticalOptions="Center" FontSize="16" Text="{Binding report}"/>
+                                            <Label TextColor="{AppThemeBinding Dark=white,Light=black}" VerticalOptions="Center" FontSize="16" Text="{Binding sharedDate}" HorizontalOptions="EndAndExpand"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="25"/>
+                            </CollectionView.ItemsLayout>
+                        </CollectionView>
+
+                    </StackLayout>
+                </RefreshView>
+            </StackLayout>
+        </ScrollView>
+    
+    </ContentPage.Content>
+    
+</ContentPage>

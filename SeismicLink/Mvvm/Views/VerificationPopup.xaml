@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mtc:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeismicLink.Mvvm.Views.VerificationPopup"
+           
+              xmlns:mtc="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+           xmlns:vm="clr-namespace:SeismicLink.Mvvm.ViewModels"
+           CanBeDismissedByTappingOutsideOfPopup="False">
+
+    <mtc:Popup.BindingContext>
+        <vm:SeismicLinkLoginPageVM/>
+    </mtc:Popup.BindingContext>
+
+<StackLayout BackgroundColor="{AppThemeBinding Dark=black,Light=white}" Spacing="25" Padding="20" WidthRequest="{StaticResource Key=DeviceWidth}" HeightRequest="{StaticResource DeviceHeight}">
+        <Label Text="Check Your Email"  HorizontalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="{AppThemeBinding Dark=white,Light=black}"/>
+        <Label  TextColor="{AppThemeBinding Dark=LightGray,Light=DimGray}" Text="Please check your email (if the email hasn't reached you, it may have landed in your spam folder) and then click on the 'Continue' button."/>
+        <Button Clicked="Button_Clicked"  BackgroundColor="{AppThemeBinding Dark=white,Light=black}" FontAttributes="Bold" Text="C o n t i n u e" TextColor="{AppThemeBinding Dark=black,Light=white}" />
+    </StackLayout>
+
+</mtc:Popup>

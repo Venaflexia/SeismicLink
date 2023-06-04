@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeismicLink.Mvvm.Views.SettingsPage"
+             Title="Settings">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="15" Padding="0,15">
+                <Label Margin="15,0" FontAttributes="Bold" Text="Account" FontSize="Title"/>
+            <StackLayout Padding="15,5" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#f2f1f6}" Orientation="Horizontal">
+                <Label VerticalOptions="Center" FontSize="Subtitle" Text="Email: "/>
+                <Label  VerticalOptions="Center"  FontSize="Subtitle"  x:Name="emailInfo"/>
+            </StackLayout>
+                <StackLayout  Padding="15,5,15,5" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#f2f1f6}" Orientation="Horizontal">
+                    <Label VerticalOptions="Center"  FontSize="Subtitle" Text="Password: "/>
+                    <Label VerticalOptions="Center"  FontSize="Subtitle"  Text="*******"/>
+                    <Label Text="&#xf13e;" x:Name="NewPasswordLabel" FontFamily="FAS" VerticalOptions="Center" FontSize="18" TextColor="{AppThemeBinding Dark=white,Light=black}" HorizontalOptions="EndAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <StackLayout Padding="15,5,15,5" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#f2f1f6}" Orientation="Horizontal">
+                <Label VerticalOptions="Center"  FontSize="Subtitle" Text="Username: "/>
+                <Label VerticalOptions="Center"  FontSize="Subtitle"  x:Name="userNameInfo"/>
+                    <Label Text="&#xf4fe;"  FontFamily="FAS" VerticalOptions="Center" FontSize="18" TextColor="{AppThemeBinding Dark=white,Light=black}" HorizontalOptions="EndAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <StackLayout IsVisible="False" Spacing="5" x:Name="NewUsernameStacklayout" Padding="15,5" Orientation="Horizontal" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#f2f1f6}">
+                    <Label Text="&#x2b;" x:Name="NewUserNameLabel" FontFamily="FAS" VerticalOptions="Center" FontSize="18" TextColor="{AppThemeBinding Dark=white,Light=black}"/>
+                    <Entry Placeholder=" New Username" x:Name="NewUserNameEntry" VerticalOptions="Center" Completed="NewUserNameEntry_Completed" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Padding="15,5" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#f2f1f6}" Orientation="Horizontal">
+                <Picker VerticalOptions="Center" 
+                        SelectedIndexChanged="picker_SelectedIndexChanged"
+                        TextColor="{AppThemeBinding Dark=orangered,Light=dodgerblue}" 
+                        HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" 
+                      Title="Country Name" x:Name="picker"  
+                        BackgroundColor="{AppThemeBinding Dark=#252525,Light=#f2f1f6}" TitleColor="DodgerBlue"/>
+                
+            </StackLayout>
+
+                <StackLayout Padding="15,5" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#f2f1f6}" Orientation="Horizontal">
+                    <Picker VerticalOptions="Center" IsEnabled="False" TextColor="{AppThemeBinding Dark=orangered,Light=dodgerblue}" 
+                        HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" 
+                        Title="Language"
+                        x:Name="pickerLanguage"  BackgroundColor="{AppThemeBinding Dark=#252525,Light=#f2f1f6}" 
+                        TitleColor="DodgerBlue"/>
+                </StackLayout>
+                <Line BackgroundColor="Orange" HeightRequest="5" WidthRequest="30" HorizontalOptions="Start" Margin="15,0"/>
+
+                <Label Margin="15,0" FontAttributes="Bold" Text="Mode" FontSize="Title"/>
+                <StackLayout Padding="15,5" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#f2f1f6}" Orientation="Horizontal">
+                    <Label VerticalOptions="Center" FontSize="Subtitle" Text="Dark Mode "/>
+                    <Label Text="Auto" TextColor="{AppThemeBinding Light=DimGray,Dark=LightGray}"  HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <Line BackgroundColor="Orange" HeightRequest="5"
+                  WidthRequest="30" HorizontalOptions="Start" Margin="15,0"/>
+                <Label Margin="15,0" FontAttributes="Bold" Text="Documents" FontSize="Title"/>
+                <StackLayout Padding="15,5" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#f2f1f6}" Orientation="Horizontal">
+                    <Label VerticalOptions="Center" FontSize="Subtitle" Text="Help ">
+                    </Label>
+            </StackLayout>
+            <StackLayout Padding="15,5" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#f2f1f6}" Orientation="Horizontal">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="aboutTapGestureRecognizer_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+
+                    <Label VerticalOptions="Center" FontSize="Subtitle" Text="Terms and Conditions "/>
+                </StackLayout>
+                <Line BackgroundColor="Orange" HeightRequest="5" WidthRequest="30" HorizontalOptions="Start" Margin="15,0"/>
+                <Button CornerRadius="0" x:Name="btnSignOut" Clicked="btnSignOut_Clicked" Text="Sign Out" FontAttributes="Bold" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#f2f1f6}" TextColor="Red"/>
+            <Button CornerRadius="0" x:Name="btnDelete" Clicked="btnDelete_Clicked" Text="Delete Account" FontAttributes="Bold" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#f2f1f6}" TextColor="Red"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+    
+</ContentPage>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeismicLink.Mvvm.Views.AddEmergencyPage"
+             Title="Emergency" xmlns:vm="clr-namespace:SeismicLink.Mvvm.ViewModels"
+            >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:EarthquakeEmergencyAssistancePageVM x:Key="vm"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem CommandParameter="{Binding Source={StaticResource Key=vm},Path=CanShare}" Text="Publish" Command="{Binding Source={StaticResource Key=vm},Path=CmdShareEmegency}"  />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+    <StackLayout BindingContext="{StaticResource Key=vm}" Spacing="15" Padding="15" >
+            <Picker SelectedItem="{Binding CountryName}" Title="Country Name" x:Name="picker" TextColor="White" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#364F6B}" TitleColor="Orange" >
+        
+    </Picker>
+            <Entry ReturnType="Next" Text="{Binding CityName}" Placeholder="City Name" TextColor="White" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#364F6B}"/>
+            <Entry ReturnType="Next" Text="{Binding Name}" Placeholder="Name" TextColor="White" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#364F6B}"/>
+            <Entry ReturnType="Next" Text="{Binding LastName}" Placeholder="Lastname" TextColor="White" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#364F6B}"/>
+      
+        <StackLayout Orientation="Horizontal" Padding="0">
+                <Entry Keyboard="Email" ReturnType="Next" TextColor="White" Text="{Binding Email}" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#364F6B}" Placeholder="E-Mail" HorizontalOptions="FillAndExpand"/>
+       </StackLayout>
+        <StackLayout Orientation="Horizontal" Padding="0">
+                <Entry Keyboard="Telephone" ReturnType="Next" TextColor="White" Text="{Binding TelNo}" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#364F6B}" Placeholder="Telephone" HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
+            <Editor TextColor="White" Text="{Binding HelpDescription}"  Placeholder="Detail" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#364F6B}" VerticalOptions="FillAndExpand"/>
+        
+    </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeismicLink.Mvvm.Views.EarthquakeListPage"
+             Title="EarthquakeListPage"
+             xmlns:vm="clr-namespace:SeismicLink.Mvvm.ViewModels"
+             Shell.NavBarIsVisible="False"
+                xmlns:mtc="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundColor="{AppThemeBinding Dark=black,Light=white}" 
+             >
+
+    <ContentPage.Resources>
+        <vm:EarthquakeListPageVM x:Key="vm"/>
+    </ContentPage.Resources>
+    <ContentPage.Behaviors>
+        <mtc:StatusBarBehavior StatusBarColor="{AppThemeBinding Dark=black,Light=white}" StatusBarStyle="{AppThemeBinding Dark=LightContent,Light=DarkContent}"/>
+    </ContentPage.Behaviors>
+    <ScrollView>
+        <StackLayout Padding="15,5,15,0" BindingContext="{StaticResource Key=vm}">
+            <StackLayout Margin="0,20,0,20" Spacing="5"  Orientation="Horizontal">
+                <Label FontSize="Title" Margin="0,0,5,0" Text="{Binding CountEarthquake}" VerticalOptions="Center" TextColor="{AppThemeBinding Dark=#2DCF85,Light=OrangeRed}"/>
+                <Frame BackgroundColor="Transparent" CornerRadius="30" Margin="0" Padding="0" BorderColor="{AppThemeBinding Dark=white,Light=black}" HorizontalOptions="FillAndExpand">
+                    <SearchBar  Text="{Binding CityName}" SearchCommand="{Binding CmdSearch}" Placeholder="Search City Name"/>
+                </Frame>
+                <ImageButton Command="{Binding CmdFilter}" VerticalOptions="Center" Margin="0" CornerRadius="5" Padding="5" HeightRequest="50" WidthRequest="50" BackgroundColor="{AppThemeBinding Dark=white,Light=#364F6B}" >
+                    <ImageButton.Source>
+                        <FontImageSource Glyph="&#xf0b0;" Color="{AppThemeBinding Dark=black}" FontFamily="FAS"/>
+                    </ImageButton.Source>
+                </ImageButton>
+            </StackLayout>
+            <Label IsVisible="{Binding LabelIsVisible}" Text="The result you are looking for could not be found." HorizontalTextAlignment="Center" HorizontalOptions="Center" Margin="0,20,0,0" FontSize="Subtitle"/>
+
+            <RefreshView Command="{Binding CmdRefreshEarthquake}" BackgroundColor="white"  RefreshColor="DodgerBlue" IsRefreshing="{Binding IsRefreshing}">
+                <CollectionView
+                x:Name="CollectionViewEarthQuake"
+                ItemsSource="{Binding EarthquakeList}"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedItem}" 
+                SelectionChangedCommand="{Binding CmdSelectionChanged}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout HeightRequest="110" Padding="15,0" BackgroundColor="{AppThemeBinding Dark=#252525,Light=#364F6B}">
+                                <StackLayout VerticalOptions="CenterAndExpand" Spacing="5" >
+                                    <Label Margin="0,0,0,5" TextColor="White" FontAttributes="Bold" FontSize="Subtitle"  Text="{Binding properties.title}"/>
+                                    <Label TextColor="LightGray" FontSize="17" Text="{Binding properties.magType,StringFormat='Mag Type={0}'}"/>
+                                    <Label TextColor="{AppThemeBinding Dark=DodgerBlue,Light=Orange}" FontSize="15" FontAttributes="Bold" Text="{Binding properties.date}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout VerticalItemSpacing="15"  Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
